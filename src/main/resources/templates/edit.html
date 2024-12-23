@@ -6,6 +6,11 @@
     <title>Edit User</title>
 </head>
 <body>
+<header th:align="right">
+    <form th:method="POST" th:action="@{/logout}">
+        <button type="submit">Log out</button>
+    </form>
+</header>
 
 <form th:method="POST" th:action="@{/admin/edit}" th:object="${user}">
 

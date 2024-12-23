@@ -6,6 +6,11 @@
     <title>Users</title>
 </head>
     <body>
+    <header th:align="right">
+        <form th:method="POST" th:action="@{/logout}">
+            <button type="submit">Log out</button>
+        </form>
+    </header>
         <table th:border="1">
             <thead>
                 <tr>
