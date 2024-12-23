@@ -47,12 +47,12 @@ public class Role implements GrantedAuthority {
         this.username = username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -60,7 +60,10 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(username, role.username) && Objects.equals(authority, role.authority) && Objects.equals(users, role.users);
+        return Objects.equals(id, role.id)
+                && Objects.equals(username, role.username)
+                && Objects.equals(authority, role.authority)
+                && Objects.equals(users, role.users);
     }
 
     @Override
