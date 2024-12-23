@@ -5,8 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -107,6 +105,11 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
 

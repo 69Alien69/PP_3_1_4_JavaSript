@@ -22,13 +22,13 @@
                 <td th:text="${user.getLastName()}"/>
                 <td th:text="${user.getEmail()}"/>
                 <td>
-                    <form th:action="@{/users/edit}">
+                    <form th:action="@{/admin/edit}">
                         <input type="hidden" th:name="userId" th:value="${user.getId()}">
                         <button type="submit">edit</button>
                     </form>
                 </td>
                 <td>
-                    <form th:method="POST" th:action="@{/users/delete}">
+                    <form th:method="POST" th:action="@{/admin/delete}">
                         <input type="hidden" th:name="userId" th:value="${user.getId()}">
                         <button type="submit">delete</button>
                     </form>
@@ -36,7 +36,7 @@
             </tr>
             </tbody>
         </table>
-        <form action="/users/add">
+        <form action="/admin/add">
             <button>Add user</button>
         </form>
     </body>

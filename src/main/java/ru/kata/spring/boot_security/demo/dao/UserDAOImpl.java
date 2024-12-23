@@ -38,4 +38,11 @@ public class UserDAOImpl implements UserDAO {
     public User getUser(long id) {
         return entityManager.find(User.class, id);
     }
+
+    @Override
+    public User getUser(String username) {
+        return entityManager.createQuery("select u from User u where username = ?1", User.class)
+                .setParameter(1, username)
+                .getSingleResult();
+    }
 }

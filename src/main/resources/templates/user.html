@@ -4,8 +4,13 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-
+<h1 th:text="${user.getName()} + ', welcome spring boot security page!'"/>
+<ol>
+    <li th:text="'Your username: ' + ${user.getUsername()}"/>
+    <li th:text="'Your name: ' + ${user.getName()}"/>
+    <li th:text="'Your lastname: ' + ${user.getLastName()}"/>
+    <li th:text="'Your email: ' + ${user.getEmail()}"/>
+</ol>
 
 </body>
 </html>
