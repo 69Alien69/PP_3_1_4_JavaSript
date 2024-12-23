@@ -16,6 +16,16 @@
 
     <input type="hidden" th:field="*{id}" th:value="${user.getId()}">
 
+    <label th:for="username">Enter username</label>
+    <input type="text" th:field="*{username}" id="username" required>
+
+    <br><br>
+
+    <label th:for="password">Enter password</label>
+    <input type="text" th:field="*{password}" id="password" required>
+
+    <br><br>
+
     <label th:for="name">Enter name:</label>
     <input type="text" th:field="*{name}" th:value="${user.getName()}" id="name" required>
 
