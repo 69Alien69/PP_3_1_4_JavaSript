@@ -1,11 +1,13 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -40,9 +42,15 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return entityManager.createQuery("select u from User u where username=?1", User.class)
-                .setParameter(1, username)
-                .getSingleResult();
+    public Optional<User> getUserByUsername(String username) {
+        Optional<User> user;
+        try {
+            user = Optional.of(entityManager.createQuery("select u from User u where username=?1", User.class)
+                    .setParameter(1, username)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            user = Optional.empty();
+        }
+        return user;
     }
 }
