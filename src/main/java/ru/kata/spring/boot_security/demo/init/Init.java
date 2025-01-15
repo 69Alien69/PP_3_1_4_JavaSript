@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.init;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -12,11 +11,9 @@ import java.util.Set;
 @Component
 public class Init {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public Init(UserService userService, PasswordEncoder passwordEncoder) {
+    public Init(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -30,7 +27,7 @@ public class Init {
         User admin = new User();
         admin.setUsername("admin");
         admin.setEmail("admin@mail");
-        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setPassword("admin");
         admin.setRoles(Set.of(adminRole));
         admin.setName("adminName");
         admin.setLastName("adminLastName");
@@ -38,7 +35,7 @@ public class Init {
         User user = new User();
         user.setUsername("user");
         user.setEmail("user@mail");
-        user.setPassword(passwordEncoder.encode("user"));
+        user.setPassword("user");
         user.setRoles(Set.of(userRole));
         user.setName("userName");
         user.setLastName("userLastName");
