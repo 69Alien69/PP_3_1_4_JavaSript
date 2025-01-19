@@ -59,11 +59,18 @@ public class AdminController {
     @GetMapping("/edit")
     public String editUserForm(Model model, @RequestParam("userId") Long id) {
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("rolesList", roleService.getRoles());
         return "edit";
     }
 
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") User user) {
+    public String editUser(@ModelAttribute("user") User user, @RequestParam("rolesPicked") List<String> roleAuthorities) {
+
+        Set<Role> roles = roleAuthorities.stream()
+                .map(roleService::findByAuthority)
+                .collect(Collectors.toSet());
+
+        user.setRoles(roles);
         userService.updateUser(user);
         return "redirect:list";
     }

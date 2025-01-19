@@ -41,6 +41,16 @@
 
     <br><br>
 
+    <label th:each="role : ${rolesList}">
+        <input type="checkbox"
+               name="rolesPicked"
+               th:value="${role.authority}"
+               th:text="${role.authority}"
+               th:checked="${user.roles.contains(role)}"/>
+    </label>
+
+    <br><br>
+
     <input type="submit" value="Save user">
 
 </form>
