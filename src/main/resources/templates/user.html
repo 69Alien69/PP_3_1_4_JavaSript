@@ -9,10 +9,10 @@
         <button type="submit">Log out</button>
     </form>
 </header>
-<h1 th:text="${user.getName()} + ', welcome spring boot security page!'"/>
+<h1 th:text="${user.getFirstName()} + ', welcome spring boot security page!'"/>
 <ol>
     <li th:text="'Your username: ' + ${user.getUsername()}"/>
-    <li th:text="'Your name: ' + ${user.getName()}"/>
+    <li th:text="'Your name: ' + ${user.getFirstName()}"/>
     <li th:text="'Your lastname: ' + ${user.getLastName()}"/>
     <li th:text="'Your email: ' + ${user.getEmail()}"/>
 </ol>

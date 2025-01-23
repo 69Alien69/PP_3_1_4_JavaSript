@@ -13,23 +13,29 @@
 <body class="bg-light">
 <nav class="navbar bg-dark">
     <header class="container-fluid">
+        <p class="text-light h4 fw-normal">
+            <span class="fw-bold" th:text="${currentUser.getEmail()} + ' '"/>
+            <span th:text="'with roles:'"/>
+            <span th:each="role : ${currentUser.roles}"
+                  th:text="' ' + ${#strings.substring(role.authority, 5)}"/>
+        </p>
         <form th:method="POST" th:action="@{/logout}" class="ms-auto">
-            <button type="submit" class="btn text-white-50">Log out</button>
+            <button type="submit" class="btn text-white-50">Logout</button>
         </form>
     </header>
 </nav>
 <div class="d-flex">
-    <div class="p-3 bg-body" style="width: 250px; height: 100vh;">
+    <div class="pt-3 bg-body" style="width: 250px; height: 100vh;">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 <a href="#" class="nav-link active">Admin</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">User</a>
+                <a href="/user" class="nav-link">User</a>
             </li>
         </ul>
     </div>
-    <div class="p-3 flex-grow-1">
+    <div class="p-3 flex-grow-1 flex-xxl-grow-0 col-xxl-8">
         <div>
             <h1>Admin panel</h1>
             <ul class="nav nav-tabs">
@@ -37,7 +43,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/add">New User</a>
+                    <a class="nav-link" href="/admin/add">New User</a>
                 </li>
             </ul>
             <div class="card">
@@ -45,40 +51,45 @@
                     <h5>All users</h5>
                 </div>
                 <div class="container">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Lastname</th>
-                        <th>email</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.getId()}"/>
-                        <td th:text="${user.getUsername()}"/>
-                        <td th:text="${user.getName()}"/>
-                        <td th:text="${user.getLastName()}"/>
-                        <td th:text="${user.getEmail()}"/>
-                        <td>
-                            <form th:action="@{/admin/edit}">
-                                <input type="hidden" th:name="userId" th:value="${user.getId()}">
-                                <button type="submit" class="btn btn-info text-white">Edit</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form th:method="POST" th:action="@{/admin/delete}">
-                                <input type="hidden" th:name="userId" th:value="${user.getId()}">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.getId()}"/>
+                                <td th:text="${user.getFirstName()}"/>
+                                <td th:text="${user.getLastName()}"/>
+                                <td th:text="${user.getAge()}"/>
+                                <td th:text="${user.getEmail()}"/>
+                                <td><span th:each="role : ${user.roles}"
+                                          th:text="${#strings.substring(role.authority, 5)} + ' '"/></td>
+                                <td>
+                                    <form th:action="@{/admin/edit}">
+                                        <input type="hidden" th:name="userId" th:value="${user.getId()}">
+                                        <button type="submit" class="btn btn-info text-white">Edit</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:method="POST" th:action="@{/admin/delete}">
+                                        <input type="hidden" th:name="userId" th:value="${user.getId()}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

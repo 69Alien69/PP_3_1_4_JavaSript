@@ -16,7 +16,7 @@ public class User implements UserDetails {
     private long id;
 
     @Column(nullable = false)
-    private String name;
+    private String firstName;
 
     @Column(nullable = false)
     private String lastName;
@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(nullable = false)
-    private String username;
+    private byte age;
 
     @Column(nullable = false)
     private String password;
@@ -44,12 +44,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getLastName() {
@@ -76,28 +76,40 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public byte getAge() {
+        return age;
+    }
+
+    public void setAge(byte age) {
+        this.age = age;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(roles, user.roles);
+        return Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(roles, user.roles) &&
+                Objects.equals(age, user.age);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastName, email, username, roles);
+        return Objects.hash(firstName, lastName, email, roles, age);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", age='" + age + '\'' +
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
-                ", username='" + username + '\'' +
                 '}';
     }
 
@@ -113,11 +125,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+        return email;
     }
 
     public void setPassword(String password) {

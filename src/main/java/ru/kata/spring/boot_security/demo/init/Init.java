@@ -25,20 +25,20 @@ public class Init {
         userRole.setAuthority("ROLE_USER");
 
         User admin = new User();
-        admin.setUsername("admin");
         admin.setEmail("admin@mail");
         admin.setPassword("admin");
         admin.setRoles(Set.of(adminRole));
-        admin.setName("adminName");
+        admin.setFirstName("adminFirstName");
         admin.setLastName("adminLastName");
+        admin.setAge((byte) 30);
 
         User user = new User();
-        user.setUsername("user");
         user.setEmail("user@mail");
         user.setPassword("user");
         user.setRoles(Set.of(userRole));
-        user.setName("userName");
+        user.setFirstName("userFirstName");
         user.setLastName("userLastName");
+        user.setAge((byte) 35);
 
         userService.saveUser(admin);
         userService.saveUser(user);

@@ -45,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
     public Optional<User> getUserByUsername(String username) {
         Optional<User> user;
         try {
-            user = Optional.of(entityManager.createQuery("select u from User u where username=?1", User.class)
+            user = Optional.of(entityManager.createQuery("select u from User u where email=?1", User.class)
                     .setParameter(1, username)
                     .getSingleResult());
         } catch (NoResultException e) {

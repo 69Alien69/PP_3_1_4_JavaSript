@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,9 @@ public class AdminController {
     }
 
     @GetMapping("/list")
-    public String getUsers(Model model) {
+    public String getUsers(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("users", userService.getUsers());
+        model.addAttribute("currentUser", user);
         return "apanel";
     }
 
