@@ -30,6 +30,8 @@ public class AdminController {
     public String getUsers(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("currentUser", user);
+        model.addAttribute("user", new User());
+        model.addAttribute("rolesList", roleService.getRoles());
         return "apanel";
     }
 
