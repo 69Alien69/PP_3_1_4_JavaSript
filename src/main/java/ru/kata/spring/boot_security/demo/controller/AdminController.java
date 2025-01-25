@@ -35,13 +35,6 @@ public class AdminController {
         return "apanel";
     }
 
-    @GetMapping("/add")
-    public String addUserForm(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("rolesList", roleService.getRoles());
-        return "add";
-    }
-
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") User user, @RequestParam("rolesPicked") List<String> roleAuthorities) {
 
@@ -55,26 +48,35 @@ public class AdminController {
     }
 
     @PostMapping("/delete")
-    public String removeUser(@RequestParam("userId") Long id) {
+    public String removeUser(@RequestParam Long id) {
         userService.removeUserById(id);
         return "redirect:list";
     }
 
-    @GetMapping("/edit")
-    public String editUserForm(Model model, @RequestParam("userId") Long id) {
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("rolesList", roleService.getRoles());
-        return "edit";
-    }
-
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") User user, @RequestParam("rolesPicked") List<String> roleAuthorities) {
+    public String editUser(@RequestParam Long id,
+                           @RequestParam String firstName,
+                           @RequestParam String lastName,
+                           @RequestParam Byte age,
+                           @RequestParam String email,
+                           @RequestParam(required = false) String password,
+                           @RequestParam List<String> rolesPicked) {
+        User user = userService.getUser(id);
 
-        Set<Role> roles = roleAuthorities.stream()
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAge(age);
+        user.setEmail(email);
+
+        if (password != null && !password.isEmpty()) {
+            user.setPassword(password);
+        }
+
+        Set<Role> roles = rolesPicked.stream()
                 .map(roleService::findByAuthority)
                 .collect(Collectors.toSet());
-
         user.setRoles(roles);
+
         userService.updateUser(user);
         return "redirect:list";
     }
