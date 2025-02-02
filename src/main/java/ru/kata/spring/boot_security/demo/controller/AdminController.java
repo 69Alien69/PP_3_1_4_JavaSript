@@ -35,17 +35,6 @@ public class AdminController {
         return "apanel";
     }
 
-    @PostMapping("/add")
-    public String addUser(@ModelAttribute("user") User user, @RequestParam("rolesPicked") List<String> roleAuthorities) {
-
-        Set<Role> roles = roleAuthorities.stream()
-                .map(roleService::findByAuthority)
-                .collect(Collectors.toSet());
-
-        user.setRoles(roles);
-        userService.saveUser(user);
-        return "redirect:list";
-    }
 
     @PostMapping("/delete")
     public String removeUser(@RequestParam Long id) {
