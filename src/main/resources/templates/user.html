@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -14,14 +13,11 @@
 <body class="bg-light">
 <nav class="navbar bg-dark">
     <header class="container-fluid">
-        <p class="text-light h4 fw-normal">
-            <span class="fw-bold" th:text="${currentUser.getEmail()} + ' '"/>
-            <span th:text="'with roles:'"/>
-            <span th:each="role : ${currentUser.roles}"
-                  th:text="' ' + ${role.getRoleName()}"/>
+        <p id="p-current-user" class="text-light h4 fw-normal">
+
         </p>
 
-        <form th:method="POST" th:action="@{/logout}" class="ms-auto">
+        <form method="POST" action="/logout" class="ms-auto">
             <button type="submit" class="btn text-white-50">Logout</button>
         </form>
     </header>
@@ -65,18 +61,7 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody>
-                                    <tr>
-                                        <td th:text="${currentUser.getId()}"/>
-                                        <td th:text="${currentUser.getFirstName()}"/>
-                                        <td th:text="${currentUser.getLastName()}"/>
-                                        <td th:text="${currentUser.getAge()}"/>
-                                        <td th:text="${currentUser.getEmail()}"/>
-                                        <td>
-                                                <span th:each="role : ${currentUser.roles}"
-                                                      th:text="${role.getRoleName()} + ' '"/>
-                                        </td>
-                                    </tr>
+                                    <tbody id="user-table">
                                     </tbody>
                                 </table>
                             </div>
@@ -90,6 +75,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
+<script src="/js/user.js"></script>
 </body>
 </html>
